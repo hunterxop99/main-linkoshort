@@ -1,38 +1,28 @@
 const express = require('express');
-const cors = require('cors');
-const path = require('path');
-
 const app = express();
-app.use(express.json());
-app.use(cors());
 
-// Serve static files from the public folder
-app.use(express.static(path.join(__dirname, 'public')));
+// Define your short URLs
+const shortUrls = {
+  "x0557tg": "https://example.com/target-page",
+  "lsx0557": "https://example.com/another-page",
+  "x0557tg-0": "https://example.com/different-page"
+};
 
-const urlDatabase = {}; // Store shortened URLs
-
-// Generate random string for shortened URL
-const generateShortCode = () => Math.random().toString(36).substring(7);
-
-app.post('/shorten', (req, res) => {
-    const { longUrl } = req.body;
-    const shortCode = generateShortCode();
-    urlDatabase[shortCode] = longUrl;
-    res.json({ shortUrl: `https://x0557tg.vercel.app/${shortCode}` });
-});
-
-app.get('/:code', (req, res) => {
-    const longUrl = urlDatabase[req.params.code];
-    if (longUrl) {
-        res.redirect(longUrl);
-    } else {
-        res.status(404).send("Not Found");
-    }
-});
-
-// Serve index.html for root route "/"
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  res.send("Short URL service is live! Use /<shortcode> to redirect.");
 });
 
-app.listen(3000, () => console.log("Server running on port 3000"));
+// Handle short links
+app.get('/:shortcode', (req, res) => {
+  const shortCode = req.params.shortcode;
+  const targetUrl = shortUrls[shortCode];
+
+  if (targetUrl) {
+    res.redirect(301, targetUrl); // 301 for SEO-friendly redirect
+  } else {
+    res.status(404).send("Short URL not found.");
+  }
+});
+
+// Start the server
+app.listen(3000, () => console.log('Server running on port 3000'));
