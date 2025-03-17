@@ -3,42 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coming Soon</title>
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background: url('https://iili.io/3oI3M6g.jpg') no-repeat center center/cover;
-            color: white;
-            font-family: Arial, sans-serif;
-            text-align: center;
-        }
-        .container {
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.6);
-            border-radius: 10px;
-        }
-        h1 {
-            font-size: 2.5rem;
-        }
-        p {
-            font-size: 1.2rem;
-            margin-top: 10px;
-        }
-        a {
-            color: #1DA1F2;
-            text-decoration: none;
-            font-weight: bold;
-        }
-    </style>
+    <title>Link Shortener</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>We're Launching Soon!</h1>
-        <p>Stay tuned for updates.</p>
-        <p>Contact us on Telegram: <a href="https://t.me/X0557" target="_blank">@X0557</a></p>
+        <h1>Shorten Your Link</h1>
+        <input type="text" id="longUrl" placeholder="Enter URL">
+        <button onclick="shortenUrl()">Shorten</button>
+        <p id="shortenedUrl"></p>
     </div>
+    <script src="script.js"></script>
 </body>
 </html>
