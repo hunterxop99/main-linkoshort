@@ -1,6 +1,4 @@
 {
-  "version": 2,
-  "rewrites": [
-    { "source": "/:shortCode", "destination": "/api/shortener.js" }
-  ]
+  "builds": [{ "src": "server.js", "use": "@vercel/node" }],
+  "routes": [{ "src": "/(.*)", "dest": "server.js" }]
 }
