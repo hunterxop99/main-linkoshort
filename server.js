@@ -1,9 +1,13 @@
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 
 const app = express();
 app.use(express.json());
 app.use(cors());
+
+// Serve static files from the public folder
+app.use(express.static(path.join(__dirname, 'public')));
 
 const urlDatabase = {}; // Store shortened URLs
 
@@ -24,6 +28,11 @@ app.get('/:code', (req, res) => {
     } else {
         res.status(404).send("Not Found");
     }
+});
+
+// Serve index.html for root route "/"
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 app.listen(3000, () => console.log("Server running on port 3000"));
